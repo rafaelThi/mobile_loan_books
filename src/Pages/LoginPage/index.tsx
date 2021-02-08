@@ -58,7 +58,7 @@ export default function LoginPage() {
   alert(`E-mail ou senha incorreto
             ${err}`);
 }
-  },[])
+  },[stateEmail, statePassword, navigation])
 
   return (
     <View style={styles.container}>
