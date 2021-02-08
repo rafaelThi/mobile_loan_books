@@ -14,11 +14,11 @@ const styles = StyleSheet.create({
     color: '#DBDBDB',
     fontSize: 40,
     marginHorizontal: 35,
-    marginBottom:150,
-    marginTop:150,
+    marginBottom: 150,
+    marginTop: 150,
   },
   Img: {
-    position:'absolute',
+    position: 'absolute',
     width: 93,
     height: 82,
     left: 21,
@@ -26,23 +26,23 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   logo: {
-    position:'absolute',
+    position: 'absolute',
     // width: 93,
     // height: 82,
     left: 120,
     top: 45,
-    fontSize:38,
-    color: '#DBDBDB'
+    fontSize: 38,
+    color: '#DBDBDB',
   },
   Button: {
     backgroundColor: '#04D361',
-    borderRadius:15,  
-    paddingLeft:35,
-    paddingRight:34,
-    paddingTop:20,
-    paddingBottom:20,
+    borderRadius: 15,
+    paddingLeft: 35,
+    paddingRight: 34,
+    paddingTop: 20,
+    paddingBottom: 20,
   },
-  ViewButton:{
+  ViewButton: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -50,6 +50,6 @@ const styles = StyleSheet.create({
   ImgButton: {
     height: 45,
     width: 40,
-  }
+  },
 });
 export default styles;
