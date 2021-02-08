@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import HomePage from '../Pages/HomePage'
+import LoginPage from '../Pages/LoginPage'
 
 
 const {Navigator, Screen} = createStackNavigator();
@@ -13,6 +14,7 @@ function  AppStack() {
             <Navigator  screenOptions={{headerShown : false}}  >
 
                 <Screen name='Home' component={HomePage} />
+                <Screen name='LoginPage' component={LoginPage} />
 
             </Navigator>
         </NavigationContainer>

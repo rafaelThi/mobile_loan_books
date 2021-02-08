@@ -3,18 +3,11 @@ import React from 'react';
 import { Text, View, Image } from 'react-native';
 import Logo from '../../../assets/Logo.png';
 import book from '../../../assets/book.png';
-import { RectButton } from 'react-native-gesture-handler'
+import { RectButton, TextInput } from 'react-native-gesture-handler'
 import styles from './styles';
-import { useNavigation } from '@react-navigation/native';
+import { Link } from '@react-navigation/native';
 
 export default function HomePage() {
-  
-  const navigation = useNavigation();
-
-  function handleLoginPage() {
-    navigation.navigate('LoginPage')
-  }
-  
   return (
     <View style={styles.container}>
       <Image source={Logo} style={styles.Img} />
@@ -22,17 +15,27 @@ export default function HomePage() {
       Books Loan
       </Text>
       <Text 
-      style={styles.titleHome}>Sua plaforma para empréstimo 
-        de livros Mobile!
+      style={styles.titleLoginPage}>Antes de procurar um livro vamos logar!
         </Text>
-        <RectButton onPress={handleLoginPage} style={styles.Button} >
+        <Text  style={styles.subTitleLoginPage} >
+        Caso não tenha uma conta você pode criar uma{' '}
+        <Link to={''} >
+         clicando aqui
+        </Link>
+        </Text>
+        <TextInput 
+         placeholderTextColor='#c1bccc'
+         style={styles.input}
+         placeholder="Digite seu email"
+        />
+        {/* <RectButton style={styles.Button} >
           <View style={styles.ViewButton}  >
           <Image source={book} style={styles.ImgButton} />
           <Text>
         Procurar um livro
           </Text>
           </View>
-        </RectButton>
+        </RectButton> */}
       <StatusBar style="auto" />
     </View>
   );
