@@ -26,6 +26,8 @@
       "@typescript-eslint"
   ],
   "rules": {
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-alert":"off",
     "react/style-prop-object": "off",
     "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "error",

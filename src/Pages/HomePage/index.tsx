@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
@@ -41,7 +40,6 @@ export default function HomePage() {
           </Text>
         </View>
       </RectButton>
-      <StatusBar style="auto" />
     </View>
   );
 }

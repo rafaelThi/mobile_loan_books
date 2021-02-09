@@ -1,5 +1,3 @@
-/* eslint-disable import/extensions */
-import { StatusBar } from 'expo-status-bar';
 import React, { useCallback, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
@@ -75,7 +73,7 @@ export default function LoginPage() {
         Caso não tenha uma conta você pode criar uma
         {' '}
         {' '}
-        <Link to="">
+        <Link to="Home">
           clicando aqui
         </Link>
       </Text>
@@ -102,7 +100,6 @@ export default function LoginPage() {
           </Text>
         </View>
       </RectButton>
-      <StatusBar style="auto" />
     </View>
   );
 }
