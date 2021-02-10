@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { Link, useNavigation, useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
@@ -25,10 +25,6 @@ export default function SearchPage() {
   const params = route.params as IId;
 
   // const navigation = useNavigation();
-
-  function handleLoginPage() {
-    alert('ok');
-  }
 
   const [booksName, setBooksName] = useState<IBook[]>([]);
 
@@ -122,9 +118,12 @@ export default function SearchPage() {
           Basta digitar o título que procura, ou o nome do autor ou a linguagem
           do livro que deseja encontrar;
         </Text>
+        <Text>
+          Nome do livro:
+        </Text>
         <TextInput
-        // value={stateEmail}
-        // onChangeText={(email) => setStateEmail(email)}
+          value={titleBook}
+          onChangeText={(title) => setTitleBook(title)}
           placeholderTextColor="#c1bccc"
           style={styles.input}
           placeholder="Digite o título que procura..."
@@ -136,9 +135,12 @@ export default function SearchPage() {
             </Text>
           </RectButton>
         </View>
+        <Text>
+          Autor do livro:
+        </Text>
         <TextInput
-        // value={stateEmail}
-        // onChangeText={(email) => setStateEmail(email)}
+          value={authorBook}
+          onChangeText={(author) => setAuthorBook(author)}
           placeholderTextColor="#c1bccc"
           style={styles.input}
           placeholder="Digite o autor que procura..."
@@ -152,9 +154,12 @@ export default function SearchPage() {
             </View>
           </RectButton>
         </View>
+        <Text>
+          Linguage do livro:
+        </Text>
         <TextInput
-        // value={stateEmail}
-        // onChangeText={(email) => setStateEmail(email)}
+          value={languageBook}
+          onChangeText={(language) => setLanguageBook(language)}
           placeholderTextColor="#c1bccc"
           style={styles.input}
           placeholder="Digite a linguagem que procura..."
@@ -168,6 +173,30 @@ export default function SearchPage() {
             </View>
           </RectButton>
         </View>
+
+        {booksName.map((bookName) => (
+          <View key={bookName.id} style={styles.books}>
+            <Link to="/">
+              <View style={styles.boxBook}>
+                <Image source={{ uri: bookName.img }} style={styles.avatar} />
+              </View>
+              <View>
+                <Text style={styles.nameBook}>
+                  {bookName.name}
+                  {' '}
+                  {'\n'}
+                </Text>
+                <Text>
+                  Autor:
+                  {' '}
+                  {bookName.author}
+                </Text>
+              </View>
+            </Link>
+            {/* <FiChevronRight size={20} /> */}
+          </View>
+        ))}
+
       </ScrollView>
     </View>
   );

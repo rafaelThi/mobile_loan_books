@@ -26,6 +26,8 @@
       "@typescript-eslint"
   ],
   "rules": {
+    "no-console":"off",
+    "camelcase":"off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "no-alert":"off",
     "react/style-prop-object": "off",

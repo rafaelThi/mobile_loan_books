@@ -87,5 +87,36 @@ const styles = StyleSheet.create({
     height: 45,
     width: 40,
   },
+  avatar: {
+    height: 40,
+    width: 35,
+    borderRadius: 50,
+    backgroundColor: '#eee',
+    // marginStart: 50,
+    // marginLeft: 10,
+    // marginRight: 10,
+    marginRight: 5,
+
+  },
+  books: {
+    paddingHorizontal: 15,
+    paddingVertical: 15,
+    marginTop: 7,
+    maxWidth: 550,
+    height: 75,
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    marginBottom: 10,
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
+
+  },
+  boxBook: {
+    marginHorizontal: 5,
+  },
+  nameBook: {
+    maxHeight: 20,
+    maxWidth: 250,
+  },
 });
 export default styles;
