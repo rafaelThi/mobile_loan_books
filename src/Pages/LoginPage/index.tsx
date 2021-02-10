@@ -43,11 +43,11 @@ export default function LoginPage() {
         password,
       });
       const { token } = sessionUser.data.createSession;
-      const { id } = sessionUser.data.createSession.user;
+      // const { id } = sessionUser.data.createSession.user;
       const matchToken = await api.get(`/users-token/token/${token}`);
 
       if (matchToken && sessionUser) {
-        navigation.navigate('SearchPage', { id });
+        navigation.navigate('SearchPage', { token });
       } else {
         alert('E-mail ou senha incorreto');
       }
