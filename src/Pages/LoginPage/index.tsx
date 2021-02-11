@@ -7,14 +7,7 @@ import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 import api from '../../service/api';
 
-interface IEmail {
-  email: string
-}
-
 export default function LoginPage() {
-  const route = useRoute();
-  const params = route.params as IEmail;
-
   const [stateEmail, setStateEmail] = useState('');
   const [statePassword, setStatePassword] = useState('');
 
@@ -69,7 +62,6 @@ export default function LoginPage() {
         Antes de procurar um livro vamos logar!
       </Text>
       <Text style={styles.subTitleLoginPage}>
-        {params.email}
         Caso não tenha uma conta você pode criar uma
         {' '}
         {' '}

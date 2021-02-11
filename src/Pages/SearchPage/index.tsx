@@ -24,11 +24,9 @@ export default function SearchPage() {
   const route = useRoute();
   const params = route.params as IId;
 
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const [booksName, setBooksName] = useState<IBook[]>([]);
-
-  const [idUser, setIdUser] = useState('');
 
   const [titleBook, setTitleBook] = useState('');
   const [authorBook, setAuthorBook] = useState('');
@@ -74,7 +72,6 @@ export default function SearchPage() {
       alert('Ops, parece que não achamos o autor que busca, você pode confirmar a escrita ou buscar pelo nome do livro ou linguagem.');
     }
   }, [authorBook, params.token]);
-
   const handleSearchLanguage = useCallback(async () => {
     try {
       const name = languageBook;
@@ -175,26 +172,29 @@ export default function SearchPage() {
         </View>
 
         {booksName.map((bookName) => (
-          <View key={bookName.id} style={styles.books}>
-            <Link to="/">
-              <View style={styles.boxBook}>
-                <Image source={{ uri: bookName.img }} style={styles.avatar} />
-              </View>
-              <View>
-                <Text style={styles.nameBook}>
-                  {bookName.name}
-                  {' '}
-                  {'\n'}
-                </Text>
-                <Text>
-                  Autor:
-                  {' '}
-                  {bookName.author}
-                </Text>
-              </View>
-            </Link>
-            {/* <FiChevronRight size={20} /> */}
-          </View>
+          // <View key={bookName.id} style={styles.books}>
+          <RectButton
+            key={bookName.id}
+            style={styles.books}
+            onPress={() => { navigation.navigate('PageBook', { bookName }); }}
+            // onPress={() => { console.log(bookName); }}
+          >
+            <View style={styles.boxBook}>
+              <Image source={{ uri: bookName.img }} style={styles.avatar} />
+            </View>
+            <View>
+              <Text style={styles.nameBook}>
+                {bookName.name}
+                {' '}
+                {'\n'}
+              </Text>
+              <Text>
+                Autor:
+                {' '}
+                {bookName.author}
+              </Text>
+            </View>
+          </RectButton>
         ))}
 
       </ScrollView>

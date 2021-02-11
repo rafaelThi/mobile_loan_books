@@ -1,23 +1,16 @@
 import React from 'react';
 import { Text, View, Image } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import Logo from '../../../assets/Logo.png';
 import book from '../../../assets/book.png';
 import styles from './styles';
 
-interface IId {
-  id: string
-}
 export default function HomePage() {
-  const route = useRoute();
-  const params = route.params as IId;
-
   const navigation = useNavigation();
 
   function handleLoginPage() {
-    const email = 'teste@teste.com';
-    navigation.navigate('LoginPage', { email });
+    navigation.navigate('LoginPage');
   }
 
   return (

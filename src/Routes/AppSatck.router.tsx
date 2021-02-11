@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import SearchPager from '../Pages/SearchPage';
+import PageBook from '../Pages/PageBook';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,6 +17,7 @@ function AppStack() {
         <Screen name="Home" component={HomePage} />
         <Screen name="LoginPage" component={LoginPage} />
         <Screen name="SearchPage" component={SearchPager} />
+        <Screen name="PageBook" component={PageBook} />
 
       </Navigator>
     </NavigationContainer>
