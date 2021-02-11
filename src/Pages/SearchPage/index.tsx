@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
-import { Link, useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
