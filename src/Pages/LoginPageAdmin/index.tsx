@@ -1,15 +1,13 @@
 import React, { useCallback, useState } from 'react';
-import {
-  Text, View, Image, ScrollView,
-} from 'react-native';
-import { RectButton, TextInput } from 'react-native-gesture-handler';
+import { Text, View, Image } from 'react-native';
+import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
 import { Link, useNavigation, useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 import api from '../../service/api';
 
-export default function LoginPage() {
+export default function LoginPageAdmin() {
   const [stateEmail, setStateEmail] = useState('');
   const [statePassword, setStatePassword] = useState('');
 
@@ -58,7 +56,7 @@ export default function LoginPage() {
         style={styles.search}
         contentContainerStyle={{
           paddingHorizontal: 20,
-          paddingBottom: 50,
+          paddingBottom: 0,
         }}
       >
         <Image source={Logo} style={styles.Img} />
@@ -68,15 +66,7 @@ export default function LoginPage() {
         <Text
           style={styles.titleLoginPage}
         >
-          Antes de procurar um livro vamos logar!
-        </Text>
-        <Text style={styles.subTitleLoginPage}>
-          Caso não tenha uma conta você pode criar uma
-          {' '}
-          {' '}
-          <Link to="Home">
-            clicando aqui
-          </Link>
+          Lembrando que essa é a área do admin, se você não é admin clique aqui
         </Text>
         <TextInput
           value={stateEmail}

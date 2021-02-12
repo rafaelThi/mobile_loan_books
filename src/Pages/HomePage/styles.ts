@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     marginBottom: 150,
     marginTop: 150,
   },
-  Img: {
+  ImgLogo: {
     position: 'absolute',
     width: 93,
     height: 82,
@@ -25,7 +25,10 @@ const styles = StyleSheet.create({
     top: 35,
     borderRadius: 15,
   },
-  logo: {
+  search: {
+    marginTop: 0,
+  },
+  TextLogo: {
     position: 'absolute',
     // width: 93,
     // height: 82,

@@ -1,5 +1,7 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
+import {
+  Text, View, Image, ScrollView,
+} from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Logo from '../../../assets/Logo.png';
@@ -13,26 +15,45 @@ export default function HomePage() {
     navigation.navigate('LoginPage');
   }
 
+  function handleLoginPageAdmin() {
+    navigation.navigate('LoginPageAdmin');
+  }
+
   return (
     <View style={styles.container}>
-      <Image source={Logo} style={styles.Img} />
-      <Text style={styles.logo}>
-        Books Loan
-      </Text>
-      <Text
-        style={styles.titleHome}
+      <ScrollView
+        style={styles.search}
+        contentContainerStyle={{
+          paddingHorizontal: 20,
+          paddingBottom: 0,
+        }}
       >
-        Sua plaforma para empréstimo
-        de livros Mobile!
-      </Text>
-      <RectButton onPress={handleLoginPage} style={styles.Button}>
-        <View style={styles.ViewButton}>
-          <Image source={book} style={styles.ImgButton} />
-          <Text>
-            Procurar um livro
-          </Text>
-        </View>
-      </RectButton>
+        <Image source={Logo} style={styles.ImgLogo} />
+        <Text style={styles.TextLogo}>
+          Books Loan
+        </Text>
+        <Text
+          style={styles.titleHome}
+        >
+          Sua plaforma para empréstimo
+          de livros Mobile!
+        </Text>
+        <RectButton onPress={handleLoginPage} style={styles.Button}>
+          <View style={styles.ViewButton}>
+            <Image source={book} style={styles.ImgButton} />
+            <Text>
+              Procurar um livro
+            </Text>
+          </View>
+        </RectButton>
+        <RectButton onPress={handleLoginPageAdmin}>
+          <View style={styles.ViewButton}>
+            <Text>
+              Admin
+            </Text>
+          </View>
+        </RectButton>
+      </ScrollView>
     </View>
   );
 }

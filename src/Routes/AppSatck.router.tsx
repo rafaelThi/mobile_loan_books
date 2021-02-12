@@ -6,6 +6,7 @@ import HomePage from '../Pages/HomePage';
 import LoginPage from '../Pages/LoginPage';
 import SearchPager from '../Pages/SearchPage';
 import PageBook from '../Pages/PageBook';
+import LoginPageAdmin from '../Pages/LoginPageAdmin';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -18,6 +19,7 @@ function AppStack() {
         <Screen name="LoginPage" component={LoginPage} />
         <Screen name="SearchPage" component={SearchPager} />
         <Screen name="PageBook" component={PageBook} />
+        <Screen name="LoginPageAdmin" component={LoginPageAdmin} />
 
       </Navigator>
     </NavigationContainer>
