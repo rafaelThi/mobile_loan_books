@@ -26,8 +26,8 @@ export default function ChoicePageAdmin() {
     navigation.navigate('LoginPage', { id });
   }, [id, navigation]);
   const handleDevolution = useCallback(async () => {
-    console.log('registro de livros');
-    navigation.navigate('LoginPage', { id });
+    console.log('Devolução');
+    navigation.navigate('DevolutionPage', { id });
   }, [id, navigation]);
 
   return (
