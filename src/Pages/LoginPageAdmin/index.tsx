@@ -36,12 +36,12 @@ export default function LoginPageAdmin() {
       });
 
       const { token } = session.data;
-      const { id } = session.data.admin.id;
+      const { id } = session.data.admin;
 
       const matchToken = await api.get(`/admin-token/token321/${token}`);
 
       if (matchToken && session) {
-        navigation.navigate('SearchPage', { id });
+        navigation.navigate('NewBookPage', { id });
       } else {
         alert('E-mail ou senha incorreto');
       }
