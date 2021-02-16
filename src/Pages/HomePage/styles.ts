@@ -40,15 +40,24 @@ const styles = StyleSheet.create({
   Button: {
     backgroundColor: '#04D361',
     borderRadius: 15,
-    paddingLeft: 35,
-    paddingRight: 34,
+    paddingLeft: 20,
+    paddingRight: 20,
     paddingTop: 20,
     paddingBottom: 20,
+    width: 200,
+    height: 80,
+
   },
   ViewButton: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+  },
+  ViewButtonAdmin: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    marginTop: 25,
   },
   ImgButton: {
     height: 45,

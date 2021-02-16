@@ -47,7 +47,7 @@ export default function HomePage() {
           </View>
         </RectButton>
         <RectButton onPress={handleLoginPageAdmin}>
-          <View style={styles.ViewButton}>
+          <View style={styles.ViewButtonAdmin}>
             <Text>
               Admin
             </Text>
