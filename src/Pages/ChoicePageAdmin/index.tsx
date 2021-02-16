@@ -3,24 +3,32 @@ import {
   Text, View, Image, ScrollView,
 } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 
+interface IId {
+  id: string;
+}
+
 export default function ChoicePageAdmin() {
+  const route = useRoute();
+  const params = route.params as IId;
+  const { id } = params;
+
   const navigation = useNavigation();
   const handleRegister = useCallback(async () => {
-    console.log('registro de livros');
-    navigation.navigate('LoginPage');
-  }, [navigation]);
+    console.log('NewBookPage', id);
+    navigation.navigate('NewBookPage', { id });
+  }, [id, navigation]);
   const handleRequisitions = useCallback(async () => {
     console.log('registro de livros');
-    navigation.navigate('LoginPage');
-  }, [navigation]);
+    navigation.navigate('LoginPage', { id });
+  }, [id, navigation]);
   const handleDevolution = useCallback(async () => {
     console.log('registro de livros');
-    navigation.navigate('LoginPage');
-  }, [navigation]);
+    navigation.navigate('LoginPage', { id });
+  }, [id, navigation]);
 
   return (
     <View style={styles.container}>
