@@ -18,15 +18,13 @@ export default function ChoicePageAdmin() {
 
   const navigation = useNavigation();
   const handleRegister = useCallback(async () => {
-    console.log('NewBookPage', id);
     navigation.navigate('NewBookPage', { id });
   }, [id, navigation]);
   const handleRequisitions = useCallback(async () => {
-    console.log('registro de livros');
-    navigation.navigate('LoginPage', { id });
+    console.log('Requests');
+    navigation.navigate('RequestPage', { id });
   }, [id, navigation]);
   const handleDevolution = useCallback(async () => {
-    console.log('Devolução');
     navigation.navigate('DevolutionPage', { id });
   }, [id, navigation]);
 
@@ -56,6 +54,7 @@ export default function ChoicePageAdmin() {
             </Text>
           </View>
         </RectButton>
+
         <RectButton onPress={handleRequisitions} style={styles.Button}>
           <View style={styles.ViewButton}>
             <Text style={styles.textButton}>
@@ -63,6 +62,7 @@ export default function ChoicePageAdmin() {
             </Text>
           </View>
         </RectButton>
+
         <RectButton onPress={handleDevolution} style={styles.Button}>
           <View style={styles.ViewButton}>
             <Text style={styles.textButton}>

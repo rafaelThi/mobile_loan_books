@@ -3,16 +3,12 @@ import {
   Text, View, Image, ScrollView,
 } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native';
-import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 import api from '../../service/api';
 
 export default function DevolutionPage() {
   const [stateID, setStateID] = useState('');
-
-  // const navigation = useNavigation();
 
   const handleLogin = useCallback(async () => {
     try {
