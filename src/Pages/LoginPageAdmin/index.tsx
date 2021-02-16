@@ -41,7 +41,7 @@ export default function LoginPageAdmin() {
       const matchToken = await api.get(`/admin-token/token321/${token}`);
 
       if (matchToken && session) {
-        navigation.navigate('NewBookPage', { id });
+        navigation.navigate('ChoicePageAdmin', { id });
       } else {
         alert('E-mail ou senha incorreto');
       }
