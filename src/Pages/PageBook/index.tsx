@@ -19,7 +19,7 @@ interface IBook {
 }
 }
 interface IOwner {
-  owner: {
+  idOwner: {
     fullNameAdmin: string,
     emailAdmin:string,
   }
@@ -37,8 +37,8 @@ export default function PageBook() {
     setBooksName(params);
   }, [params, route.params]);
   useEffect(() => {
-    api.get(`/users-book-owners/list-owner/${booksName?.bookName.owner_id}`).then((response) => setStateOwner(response.data[0]));
-  }, [booksName?.bookName.owner_id]);
+    api.get(`/users-book-owners/list-owner/${params.bookName.owner_id}`).then((response) => setStateOwner(response.data));
+  }, [params.bookName.owner_id]);
 
   const handleRequestBook = useCallback(async () => {
     try {
@@ -58,7 +58,6 @@ export default function PageBook() {
       if (!user) {
         alert('Email Incorreto');
       }
-      console.log(user.data.user.id, 'user');
       const id_user = user.data.user.id;
       const id_book = booksName?.bookName.id;
       const id_admin = booksName?.bookName.owner_id;
@@ -67,11 +66,10 @@ export default function PageBook() {
         id_admin,
         id_user,
       });
-      console.log(request, 'request');
 
       if (request) {
         const sendMail = await api.post('/mail-provider/send-mail-request-book', {
-          email: stateOwner?.owner.emailAdmin,
+          email: stateOwner?.idOwner.emailAdmin,
           name_user: user.data.user.fullName,
           name_book: booksName?.bookName.name,
           id: request.data.requestBook.id,
@@ -94,7 +92,7 @@ Um email foi mandado ao dono do livro`);
       alert(`Email incorreto :(
       erro:${error}`);
     }
-  }, [booksName?.bookName.id, booksName?.bookName.name, booksName?.bookName.owner.emailAdmin, booksName?.bookName.owner_id, stateEmail]);
+  }, [booksName?.bookName.id, booksName?.bookName.name, booksName?.bookName.owner_id, stateEmail, stateOwner?.idOwner.emailAdmin]);
 
   return (
     <View style={styles.container}>
@@ -122,7 +120,7 @@ Um email foi mandado ao dono do livro`);
         <Text style={styles.requestBook}>
           Caso tenha interesse em pegar emprestado esse livro, solicite ao seu dono:
           {' '}
-          {stateOwner?.owner.fullNameAdmin}
+          {stateOwner?.idOwner.fullNameAdmin}
         </Text>
         <Text style={styles.requestText}>
           Para solicitar o livro, digite seu email do login:
