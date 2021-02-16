@@ -16,24 +16,29 @@ interface IBook {
   language: string;
   name: string;
   owner_id: string;
+}
+}
+interface IOwner {
   owner: {
-    fullNameAdmin: string;
-    emailAdmin: string;
+    fullNameAdmin: string,
+    emailAdmin:string,
   }
 }
-}
-
 export default function PageBook() {
   const route = useRoute();
   // const navigation = useNavigation();
 
   const [stateEmail, setStateEmail] = useState('');
+  const [stateOwner, setStateOwner] = useState<IOwner>();
   const [booksName, setBooksName] = useState<IBook | null>(null);
   const params = route.params as IBook;
 
   useEffect(() => {
     setBooksName(params);
   }, [params, route.params]);
+  useEffect(() => {
+    api.get(`/users-book-owners/list-owner/${booksName?.bookName.owner_id}`).then((response) => setStateOwner(response.data[0]));
+  }, [booksName?.bookName.owner_id]);
 
   const handleRequestBook = useCallback(async () => {
     try {
@@ -66,7 +71,7 @@ export default function PageBook() {
 
       if (request) {
         const sendMail = await api.post('/mail-provider/send-mail-request-book', {
-          email: booksName?.bookName.owner.emailAdmin,
+          email: stateOwner?.owner.emailAdmin,
           name_user: user.data.user.fullName,
           name_book: booksName?.bookName.name,
           id: request.data.requestBook.id,
@@ -117,7 +122,7 @@ Um email foi mandado ao dono do livro`);
         <Text style={styles.requestBook}>
           Caso tenha interesse em pegar emprestado esse livro, solicite ao seu dono:
           {' '}
-          {params.bookName.owner.fullNameAdmin}
+          {stateOwner?.owner.fullNameAdmin}
         </Text>
         <Text style={styles.requestText}>
           Para solicitar o livro, digite seu email do login:
