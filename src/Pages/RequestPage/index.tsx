@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Text, View, Image, ScrollView,
 } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import Logo from '../../../assets/Logo.png';
 import book from '../../../assets/book.png';
@@ -42,14 +42,92 @@ export default function RequestPage() {
           </View>
         </RectButton>
         <View style={styles.containerRequest}>
-          <Text>
-            Teste
+          <Text style={styles.textRequest}>
+            Requisição feita por: Fulano 1
           </Text>
+          <Text style={styles.textRequest}>
+            Livro requisitado: Livro X
+          </Text>
+          <Text style={styles.textRequest}>
+            Como vai ser?*
+          </Text>
+          <TextInput
+            style={styles.input}
+            multiline
+            numberOfLines={4}
+            placeholder="Digite como vai ser..."
+            placeholderTextColor="grey"
+          />
+          <Text style={styles.textSpan1}>
+            *Esse campo é obrigatorio.
+          </Text>
+          <Text style={styles.textSpan}>
+            Caso a resposta seja SIM, diga como
+            {'\n'}
+            será a entrega e o tempo de emprestimo.
+          </Text>
+          <Text style={styles.textSpan}>
+            Caso a resposta seja NÃO, deixe o porque.
+          </Text>
+
+          <RectButton onPress={() => console.log('aceite')} style={styles.ButtonAceite}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Aceitar
+              </Text>
+            </View>
+          </RectButton>
+          <RectButton onPress={() => console.log('Recusa')} style={styles.ButtonRecuse}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Recusar
+              </Text>
+            </View>
+          </RectButton>
         </View>
         <View style={styles.containerRequest}>
-          <Text>
-            Teste
+          <Text style={styles.textRequest}>
+            Requisição feita por: Fulano 1
           </Text>
+          <Text style={styles.textRequest}>
+            Livro requisitado: Livro X
+          </Text>
+          <Text style={styles.textRequest}>
+            Como vai ser?*
+          </Text>
+          <TextInput
+            style={styles.input}
+            multiline
+            numberOfLines={4}
+            placeholder="Digite como vai ser..."
+            placeholderTextColor="grey"
+          />
+          <Text style={styles.textSpan1}>
+            *Esse campo é obrigatorio.
+          </Text>
+          <Text style={styles.textSpan}>
+            Caso a resposta seja SIM, diga como
+            {'\n'}
+            será a entrega e o tempo de emprestimo.
+          </Text>
+          <Text style={styles.textSpan}>
+            Caso a resposta seja NÃO, deixe o porque.
+          </Text>
+
+          <RectButton onPress={() => console.log('aceite')} style={styles.ButtonAceite}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Aceitar
+              </Text>
+            </View>
+          </RectButton>
+          <RectButton onPress={() => console.log('Recusa')} style={styles.ButtonRecuse}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Recusar
+              </Text>
+            </View>
+          </RectButton>
         </View>
       </ScrollView>
     </View>
