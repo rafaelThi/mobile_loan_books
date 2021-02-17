@@ -15,10 +15,6 @@ export default function RequestPage() {
     navigation.navigate('LoginPage');
   }
 
-  function handleLoginPageAdmin() {
-    navigation.navigate('LoginPageAdmin');
-  }
-
   return (
     <View style={styles.container}>
       <ScrollView
@@ -35,16 +31,26 @@ export default function RequestPage() {
         <Text
           style={styles.titleHome}
         >
-          Requests
+          Essas são todas as suas requisições:
         </Text>
-        <RectButton onPress={handleLoginPage} style={styles.Button}>
+
+        <RectButton onPress={() => { console.log('Ir para as aceitas'); }} style={styles.Button}>
           <View style={styles.ViewButton}>
-            <Image source={book} style={styles.ImgButton} />
-            <Text>
-              Procurar um livro
+            <Text style={styles.textButton}>
+              Ir para as aceitas
             </Text>
           </View>
         </RectButton>
+        <View style={styles.containerRequest}>
+          <Text>
+            Teste
+          </Text>
+        </View>
+        <View style={styles.containerRequest}>
+          <Text>
+            Teste
+          </Text>
+        </View>
       </ScrollView>
     </View>
   );

@@ -12,10 +12,10 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     // flex: 1,
     color: '#DBDBDB',
-    fontSize: 40,
-    marginHorizontal: 35,
-    marginBottom: 150,
-    marginTop: 150,
+    fontSize: 25,
+    marginHorizontal: 10,
+    marginBottom: 30,
+    marginTop: 140,
   },
   ImgLogo: {
     position: 'absolute',
@@ -46,11 +46,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     width: 200,
     height: 80,
-
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: '18%',
   },
   ViewButton: {
     flexDirection: 'row',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   ViewButtonAdmin: {
@@ -63,5 +65,26 @@ const styles = StyleSheet.create({
     height: 45,
     width: 40,
   },
+  textButton: {
+    color: '#fff',
+    fontFamily: 'Roboto',
+    marginVertical: 0,
+    marginHorizontal: 5,
+  },
+  containerRequest: {
+    borderRadius: 8,
+    height: 300,
+    width: 300,
+    color: '#3D3D4D',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    backgroundColor: '#ffffff',
+    marginBottom: 22,
+    marginTop: 15,
+    marginHorizontal: 8,
+  },
+
 });
 export default styles;
