@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Text, View, Image, ScrollView,
 } from 'react-native';
@@ -115,8 +115,14 @@ export default function RequestPage() {
 
             <RectButton
               onPress={() => {
-                async () => {
+                console.log('teste1');
+                // eslint-disable-next-line react-hooks/rules-of-hooks
+                useCallback(async () => {
+                  console.log('teste2');
+
                   try {
+                    console.log('teste3');
+
                     const textAccept = textArea;
                     const schema = Yup.object().shape({
                       textAccept: Yup.string().required('Uma mesagem deve ser escrita :/').min(6, 'Digite algo maior que 6 caracteres :)'),
@@ -149,11 +155,11 @@ export default function RequestPage() {
                     alert('parece que tudo correu bem, um email foi encaminhado para você e o usuario');
 
                     await api.delete(`/requests/delete-request/${request.id}`);
-                    document.location.reload(true);
+                    // document.location.reload(true);
                   } catch (err) {
                     alert(err);
                   }
-                };
+                }, []);
               }}
               style={styles.ButtonAceite}
             >
@@ -164,6 +170,35 @@ export default function RequestPage() {
               </View>
             </RectButton>
             <RectButton
+              onPress={async () => {
+                async () => {
+                  try {
+                    const textRefuse = textArea;
+                    const schema = Yup.object().shape({
+                      textRefuse: Yup.string().required('Escreva algo para dizer o motivo da recusa.').min(3, 'Digite algo com pelo menos 3 caracteres :)'),
+                    });
+                    await schema.validate({ textRefuse });
+
+                    alert('A Recusa esta sendo proessado, por favor aguarde alguns segundos ate a sua confirmação!');
+
+                    const sendMail = await api.post('/mail-provider/send-mail-request-return-refuse', {
+                      nameBook: request.IdBook.name,
+                      nameUser: request.IdUser.fullName,
+                      emailUser: request.IdUser.email,
+                      emailAdmin: request.IdAdmin.emailAdmin,
+                      textRefuse,
+                    });
+                    if (!sendMail) {
+                      alert('Parece que algo deu errado, tente novamente');
+                    }
+                    alert('Parece que tudo correu bem, um email foi encaminhado para você e o usuario');
+                    await api.delete(`/requests/delete-request/${request.id}`);
+                    // document.location.reload(true);
+                  } catch (err) {
+                    alert(err);
+                  }
+                };
+              }}
               style={styles.ButtonRecuse}
             >
               <View style={styles.ViewButton}>
