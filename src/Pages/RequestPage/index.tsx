@@ -6,7 +6,6 @@ import { RectButton, TextInput } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
-import book from '../../../assets/book.png';
 import styles from './styles';
 import api from '../../service/api';
 
@@ -36,7 +35,7 @@ interface IId {
 }
 
 export default function RequestPage() {
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
   const route = useRoute();
   const params = route.params as IId;
   const id_admin = params.id;
@@ -49,7 +48,75 @@ export default function RequestPage() {
     requisitions.then((requisition) => {
       setRequisitions(requisition.data);
     });
-  }, [id_admin]);
+  }, [id_admin, requistitions]);
+
+  const handleAccept = useCallback(async (request) => {
+    try {
+      console.log(request);
+
+      const textAccept = textArea;
+      const schema = Yup.object().shape({
+        textAccept: Yup.string().required('Uma mesagem deve ser escrita :/').min(6, 'Digite algo maior que 6 caracteres :)'),
+      });
+      await schema.validate({ textAccept });
+
+      alert('O Aceite esta sendo proessado, por favor aguarde alguns segundos ate a sua confirmação!');
+
+      const requestAccept = await api.post('/requests/aceept',
+        {
+          id_request: request.id,
+          id_book: request.IdBook.id,
+          id_user: request.IdUser.id,
+          id_admin: request.IdAdmin.id,
+          message: textAccept,
+        });
+
+      const sendMail = await api.post('/mail-provider/send-mail-request-return-accept', {
+        idAccept: requestAccept.data.requestAccept.id,
+        nameBook: request.IdBook.name,
+        nameUser: request.IdUser.fullName,
+        nameAdmin: request.IdAdmin.fullNameAdmin,
+        emailUser: request.IdUser.email,
+        emailAdmin: request.IdAdmin.emailAdmin,
+        textAccept,
+      });
+      if (!sendMail) {
+        alert('Parece que algo deu errado, tente novamente');
+      }
+      alert('Parece que tudo correu bem, um email foi encaminhado para você e para o usuario');
+
+      await api.delete(`/requests/delete-request/${request.id}`);
+    } catch (err) {
+      alert(err);
+    }
+  }, [textArea]);
+
+  const handleRefuse = useCallback(async (request) => {
+    try {
+      const textRefuse = textArea;
+      const schema = Yup.object().shape({
+        textRefuse: Yup.string().required('Escreva algo para dizer o motivo da recusa.').min(3, 'Digite algo com pelo menos 3 caracteres :)'),
+      });
+      await schema.validate({ textRefuse });
+
+      alert('A Recusa esta sendo proessado, por favor aguarde alguns segundos ate a sua confirmação!');
+
+      const sendMail = await api.post('/mail-provider/send-mail-request-return-refuse', {
+        nameBook: request.IdBook.name,
+        nameUser: request.IdUser.fullName,
+        emailUser: request.IdUser.email,
+        emailAdmin: request.IdAdmin.emailAdmin,
+        textRefuse,
+      });
+      if (!sendMail) {
+        alert('Parece que algo deu errado, tente novamente');
+      }
+      alert('Parece que tudo correu bem, um email foi encaminhado para você e para o usuario');
+      await api.delete(`/requests/delete-request/${request.id}`);
+    } catch (err) {
+      alert(err);
+    }
+  }, [textArea]);
 
   return (
     <View style={styles.container}>
@@ -114,53 +181,8 @@ export default function RequestPage() {
             </Text>
 
             <RectButton
-              onPress={() => {
-                console.log('teste1');
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                useCallback(async () => {
-                  console.log('teste2');
-
-                  try {
-                    console.log('teste3');
-
-                    const textAccept = textArea;
-                    const schema = Yup.object().shape({
-                      textAccept: Yup.string().required('Uma mesagem deve ser escrita :/').min(6, 'Digite algo maior que 6 caracteres :)'),
-                    });
-                    await schema.validate({ textAccept });
-
-                    alert('o Aceite esta sendo proessado, por favor aguarde alguns segundos ate a sua confirmação!');
-
-                    const requestAccept = await api.post('/requests/aceept',
-                      {
-                        id_request: request.id,
-                        id_book: request.IdBook.id,
-                        id_user: request.IdUser.id,
-                        id_admin: request.IdAdmin.id,
-                        message: textAccept,
-                      });
-
-                    const sendMail = await api.post('/mail-provider/send-mail-request-return-accept', {
-                      idAccept: requestAccept.data.requestAccept.id,
-                      nameBook: request.IdBook.name,
-                      nameUser: request.IdUser.fullName,
-                      nameAdmin: request.IdAdmin.fullNameAdmin,
-                      emailUser: request.IdUser.email,
-                      emailAdmin: request.IdAdmin.emailAdmin,
-                      textAccept,
-                    });
-                    if (!sendMail) {
-                      alert('Parece que algo deu errado, tente novamente');
-                    }
-                    alert('parece que tudo correu bem, um email foi encaminhado para você e o usuario');
-
-                    await api.delete(`/requests/delete-request/${request.id}`);
-                    // document.location.reload(true);
-                  } catch (err) {
-                    alert(err);
-                  }
-                }, []);
-              }}
+              // eslint-disable-next-line no-return-await
+              onPress={async () => await handleAccept(request)}
               style={styles.ButtonAceite}
             >
               <View style={styles.ViewButton}>
@@ -170,35 +192,8 @@ export default function RequestPage() {
               </View>
             </RectButton>
             <RectButton
-              onPress={async () => {
-                async () => {
-                  try {
-                    const textRefuse = textArea;
-                    const schema = Yup.object().shape({
-                      textRefuse: Yup.string().required('Escreva algo para dizer o motivo da recusa.').min(3, 'Digite algo com pelo menos 3 caracteres :)'),
-                    });
-                    await schema.validate({ textRefuse });
-
-                    alert('A Recusa esta sendo proessado, por favor aguarde alguns segundos ate a sua confirmação!');
-
-                    const sendMail = await api.post('/mail-provider/send-mail-request-return-refuse', {
-                      nameBook: request.IdBook.name,
-                      nameUser: request.IdUser.fullName,
-                      emailUser: request.IdUser.email,
-                      emailAdmin: request.IdAdmin.emailAdmin,
-                      textRefuse,
-                    });
-                    if (!sendMail) {
-                      alert('Parece que algo deu errado, tente novamente');
-                    }
-                    alert('Parece que tudo correu bem, um email foi encaminhado para você e o usuario');
-                    await api.delete(`/requests/delete-request/${request.id}`);
-                    // document.location.reload(true);
-                  } catch (err) {
-                    alert(err);
-                  }
-                };
-              }}
+              // eslint-disable-next-line no-return-await
+              onPress={async () => await handleRefuse(request)}
               style={styles.ButtonRecuse}
             >
               <View style={styles.ViewButton}>
