@@ -39,6 +39,7 @@ export default function RequestPage() {
   const route = useRoute();
   const params = route.params as IId;
   const id_admin = params.id;
+  const { id } = params;
 
   const [textArea, setTextArea] = useState('');
   const [requistitions, setRequisitions] = useState<IRequisition[]>([]);
@@ -118,6 +119,10 @@ export default function RequestPage() {
     }
   }, [textArea]);
 
+  const handleNavigation = useCallback(async () => {
+    navigation.navigate('RequestAcceptPage', { id });
+  }, [id, navigation]);
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -137,7 +142,7 @@ export default function RequestPage() {
           Essas são todas as suas requisições:
         </Text>
 
-        <RectButton onPress={() => { console.log('Ir para as aceitas'); }} style={styles.Button}>
+        <RectButton onPress={handleNavigation} style={styles.Button}>
           <View style={styles.ViewButton}>
             <Text style={styles.textButton}>
               Ir para as aceitas

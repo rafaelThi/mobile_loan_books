@@ -11,6 +11,7 @@ import NewBookPage from '../Pages/NewBookPage';
 import ChoicePageAdmin from '../Pages/ChoicePageAdmin';
 import DevolutionPage from '../Pages/DevolutionPage';
 import RequestPage from '../Pages/RequestPage';
+import RequestAcceptPage from '../Pages/RequestAcceptPage';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -28,6 +29,7 @@ function AppStack() {
         <Screen name="ChoicePageAdmin" component={ChoicePageAdmin} />
         <Screen name="DevolutionPage" component={DevolutionPage} />
         <Screen name="RequestPage" component={RequestPage} />
+        <Screen name="RequestAcceptPage" component={RequestAcceptPage} />
 
       </Navigator>
     </NavigationContainer>
