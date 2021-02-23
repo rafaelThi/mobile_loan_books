@@ -38,11 +38,14 @@ interface IRequisition {
     fullNameAdmin: string;
   }
 }
+interface NameUser{
+  name_user: string
+}
 
 export default function HistoryRequests() {
   const route = useRoute();
   const params = route.params as IId;
-  // const id_admin = params.id;
+  const id_admin = params.id;
 
   const [requistitions, SetRequistitions] = useState<IRequisition[]>([]);
 
@@ -59,12 +62,12 @@ export default function HistoryRequests() {
       });
       await schema.validate({ name });
 
-      const response = await api.get(`/history/history-books/${params.id}/${name}`);
+      const response = await api.get(`/history/history-books/${id_admin}/${name}`);
       SetRequistitions(response.data);
     } catch (err) {
       alert('Ops, parece que não achamos o livro que busca.');
     }
-  }, [params.id, titleBook]);
+  }, [id_admin, titleBook]);
 
   const handleSearchName = useCallback(async () => {
     try {
@@ -120,7 +123,7 @@ export default function HistoryRequests() {
             Título do livro:
           </Text>
           <TextInput
-            onChangeText={(textarea) => setTitleBook(textarea)}
+            onChangeText={(titlebook) => setTitleBook(titlebook)}
             style={styles.input}
             placeholder="Digite o título do livro..."
           />
@@ -135,7 +138,7 @@ export default function HistoryRequests() {
             Nome do usuário:
           </Text>
           <TextInput
-            onChangeText={(textarea) => setNameUser(textarea)}
+            onChangeText={(nameuser) => setNameUser(nameuser)}
             style={styles.input}
             placeholder="Digite o nome do usuário..."
           />
