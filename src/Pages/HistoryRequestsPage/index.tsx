@@ -4,36 +4,48 @@ import {
 } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
 import { useRoute } from '@react-navigation/native';
+import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 import api from '../../service/api';
 
+interface IId {
+  id: string;
+}
+
+interface IAdmin {
+  idOwner: {
+    id:string;
+    fullNameAdmin: string;
+    emailAdmin: string;
+    passwordAdmin: string;
+  }
+}
+
 interface IRequisition {
   id: string;
+  id_request_accept: string;
+  id_request: string;
   id_book: string;
   id_user: string;
   id_admin: string;
   created_at: string;
   message: string;
   delivered: string;
+  devolution_at: string;
+  IdBook: {
+    id: string;
+    name: string;
+  }
   IdUser: {
     id:string;
     fullName: string;
     email: string;
   }
-  IdBook: {
-    id: string;
-    name: string;
-  }
   IdAdmin:{
     id:string;
     fullNameAdmin: string;
-    emailAdmin: string;
   }
-}
-
-interface IId {
-  id: string;
 }
 
 export default function HistoryRequests() {
@@ -41,24 +53,60 @@ export default function HistoryRequests() {
   const params = route.params as IId;
   const id_admin = params.id;
 
-  const [delivered, setDelivered] = useState('');
+  const [adminId, setIdAdmin] = useState<IAdmin>();
 
-  const [requistitions, setRequisitions] = useState<IRequisition[]>([]);
+  const [requistitions, SetRequistitions] = useState<IRequisition[]>([]);
+
+  const [titleBook, setTitleBook] = useState('');
+
+  const [nameUser, setNameUser] = useState('');
 
   useEffect(() => {
-    const requisitions = api.get(`/requests/requests-accept/${id_admin}`);
-    requisitions.then((requisition) => {
-      setRequisitions(requisition.data);
+    api.get(`/users-book-owners/list-owner/${params.id}`).then((response) => {
+      setIdAdmin(response.data);
     });
-  }, [id_admin, requistitions]);
+  }, [params.id]);
 
-  const handleAccept = useCallback(async (request) => {
-    await api.put(`/requests/request-delivered/${request.id}`, {
-      delivered,
-    });
-    setDelivered('');
-    alert(`A data ${delivered} foi salva como a data de entrega!`);
-  }, [delivered]);
+  const handleSearchTitle = useCallback(async () => {
+    try {
+      const name = titleBook;
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Digite o Título que busca.'),
+      });
+      await schema.validate({ name });
+
+      const response = await api.get(`/history/history-books/${params.id}/${name}`);
+      SetRequistitions(response.data);
+    } catch (err) {
+      alert('Ops, parece que não achamos o livro que busca.');
+    }
+  }, [params.id, titleBook]);
+
+  const handleSearchName = useCallback(async () => {
+    try {
+      const name = nameUser;
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Digite o nome que busca.'),
+      });
+      await schema.validate({ name });
+
+      const response = await api.get(`/history/history-user/${params.id}/${name}`);
+      SetRequistitions(response.data);
+    } catch (err) {
+      alert('Ops, parece que não achamos o nome do usuário que busca.');
+    }
+  }, [nameUser, params.id]);
+
+  const handleAll = useCallback(async () => {
+    try {
+      const response = await api.get(`/history/history-all/${params.id}`);
+      SetRequistitions(response.data);
+    } catch (err) {
+      alert('Ops, parece que não achamos nada :/');
+    }
+  }, [params.id]);
 
   return (
     <View style={styles.container}>
@@ -76,16 +124,14 @@ export default function HistoryRequests() {
         <Text
           style={styles.titleHome}
         >
-          Essas são todas as suas requisições aceitas:
+          Histórico de livros já devolvidos:
+        </Text>
+        <Text
+          style={styles.subTitle}
+        >
+          Basta digitar o título do livro que procura, ou o nome do usuário que deseja encontrar:
         </Text>
 
-        <RectButton onPress={() => { console.log('Ir para o historico de aceitas'); }} style={styles.Button}>
-          <View style={styles.ViewButton}>
-            <Text style={styles.textButton}>
-              Ir para o historico de devolução
-            </Text>
-          </View>
-        </RectButton>
         {requistitions.map((request) => (
           <View key={request.id} style={styles.containerRequest}>
             <Text style={styles.textRequest}>
@@ -122,24 +168,6 @@ export default function HistoryRequests() {
               {'\n'}
               exemplo: AAAA-MM-DD
             </Text>
-            <TextInput
-              value={delivered}
-              onChangeText={(delivere) => setDelivered(delivere)}
-              style={styles.input}
-              keyboardType="numeric"
-              placeholder="AAAA-MM-DD"
-            />
-            <RectButton
-              // eslint-disable-next-line no-return-await
-              onPress={async () => await handleAccept(request)}
-              style={styles.ButtonAceite}
-            >
-              <View style={styles.ViewButton}>
-                <Text style={styles.textButton}>
-                  Salvar
-                </Text>
-              </View>
-            </RectButton>
           </View>
         ))}
       </ScrollView>

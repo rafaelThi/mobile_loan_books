@@ -17,6 +17,16 @@ const styles = StyleSheet.create({
     marginBottom: 30,
     marginTop: 140,
   },
+  subTitle: {
+    justifyContent: 'center',
+    textAlign: 'left',
+    // flex: 1,
+    color: '#DBDBDB',
+    fontSize: 15,
+    marginHorizontal: 10,
+    marginBottom: 30,
+    marginTop: -20,
+  },
   ImgLogo: {
     position: 'absolute',
     width: 93,
