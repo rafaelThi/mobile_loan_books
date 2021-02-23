@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   Text, View, Image, ScrollView,
 } from 'react-native';
@@ -11,15 +11,6 @@ import api from '../../service/api';
 
 interface IId {
   id: string;
-}
-
-interface IAdmin {
-  idOwner: {
-    id:string;
-    fullNameAdmin: string;
-    emailAdmin: string;
-    passwordAdmin: string;
-  }
 }
 
 interface IRequisition {
@@ -51,21 +42,13 @@ interface IRequisition {
 export default function HistoryRequests() {
   const route = useRoute();
   const params = route.params as IId;
-  const id_admin = params.id;
-
-  const [adminId, setIdAdmin] = useState<IAdmin>();
+  // const id_admin = params.id;
 
   const [requistitions, SetRequistitions] = useState<IRequisition[]>([]);
 
   const [titleBook, setTitleBook] = useState('');
 
   const [nameUser, setNameUser] = useState('');
-
-  useEffect(() => {
-    api.get(`/users-book-owners/list-owner/${params.id}`).then((response) => {
-      setIdAdmin(response.data);
-    });
-  }, [params.id]);
 
   const handleSearchTitle = useCallback(async () => {
     try {
@@ -132,6 +115,49 @@ export default function HistoryRequests() {
           Basta digitar o título do livro que procura, ou o nome do usuário que deseja encontrar:
         </Text>
 
+        <View>
+          <Text style={styles.titleInput}>
+            Título do livro:
+          </Text>
+          <TextInput
+            onChangeText={(textarea) => setTitleBook(textarea)}
+            style={styles.input}
+            placeholder="Digite o título do livro..."
+          />
+          <RectButton onPress={handleSearchTitle} style={styles.Button}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Pesquisar
+              </Text>
+            </View>
+          </RectButton>
+          <Text style={styles.titleInput}>
+            Nome do usuário:
+          </Text>
+          <TextInput
+            onChangeText={(textarea) => setNameUser(textarea)}
+            style={styles.input}
+            placeholder="Digite o nome do usuário..."
+          />
+          <RectButton onPress={handleSearchName} style={styles.Button}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Pesquisar
+              </Text>
+            </View>
+          </RectButton>
+          <Text style={styles.titleInput}>
+            Mostrar tudo:
+          </Text>
+          <RectButton onPress={handleAll} style={styles.Button}>
+            <View style={styles.ViewButton}>
+              <Text style={styles.textButton}>
+                Mostrar tudo
+              </Text>
+            </View>
+          </RectButton>
+        </View>
+
         {requistitions.map((request) => (
           <View key={request.id} style={styles.containerRequest}>
             <Text style={styles.textRequest}>
@@ -145,6 +171,11 @@ export default function HistoryRequests() {
               {request.IdBook.name}
             </Text>
             <Text style={styles.textRequest}>
+              Email:
+              {' '}
+              {request.IdUser.email}
+            </Text>
+            <Text style={styles.textRequest}>
               Aceita no dia:
               {' '}
               {request.created_at.substr(0, 10)}
@@ -152,21 +183,18 @@ export default function HistoryRequests() {
             <Text style={styles.textRequest}>
               Entrega dia:
               {' '}
-              {request.delivered || 'Não entregue'}
+              {request.delivered}
             </Text>
             <Text style={styles.textRequest}>
-              O como vai ser:
+              O como foi:
             </Text>
             <Text style={styles.textRequestMessage}>
               {request.message}
             </Text>
             <Text style={styles.textRequest}>
-              Quando será a entrega?
-            </Text>
-            <Text style={styles.textRequestExemplo}>
-              Coloque a data como no
-              {'\n'}
-              exemplo: AAAA-MM-DD
+              Devolvido dia:
+              {' '}
+              {request.devolution_at.substr(0, 10)}
             </Text>
           </View>
         ))}
