@@ -38,9 +38,6 @@ interface IRequisition {
     fullNameAdmin: string;
   }
 }
-interface NameUser{
-  name_user: string
-}
 
 export default function HistoryRequests() {
   const route = useRoute();

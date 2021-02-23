@@ -4,7 +4,6 @@ import {
 } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 import api from '../../service/api';
