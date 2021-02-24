@@ -13,6 +13,8 @@ import DevolutionPage from '../Pages/DevolutionPage';
 import RequestPage from '../Pages/RequestPage';
 import RequestAcceptPage from '../Pages/RequestAcceptPage';
 import HistoryRequestsPage from '../Pages/HistoryRequestsPage';
+import ProfileAdminPage from '../Pages/ProfileAdmin';
+import ProfileUserPage from '../Pages/ProfileUser';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -32,6 +34,8 @@ function AppStack() {
         <Screen name="RequestPage" component={RequestPage} />
         <Screen name="RequestAcceptPage" component={RequestAcceptPage} />
         <Screen name="HistoryRequestsPage" component={HistoryRequestsPage} />
+        <Screen name="ProfileAdminPage" component={ProfileAdminPage} />
+        <Screen name="ProfileUserPage" component={ProfileUserPage} />
 
       </Navigator>
     </NavigationContainer>

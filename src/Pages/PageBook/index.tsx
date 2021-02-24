@@ -2,7 +2,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { RectButton, ScrollView, TextInput } from 'react-native-gesture-handler';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
@@ -26,7 +26,7 @@ interface IOwner {
 }
 export default function PageBook() {
   const route = useRoute();
-  // const navigation = useNavigation();
+  const navigation = useNavigation();
 
   const [stateEmail, setStateEmail] = useState('');
   const [stateOwner, setStateOwner] = useState<IOwner>();
@@ -94,6 +94,10 @@ Um email foi mandado ao dono do livro`);
     }
   }, [booksName?.bookName.id, booksName?.bookName.name, booksName?.bookName.owner_id, stateEmail, stateOwner?.idOwner.emailAdmin]);
 
+  function handleProfilePage() {
+    navigation.navigate('ProfileUserPage');
+  }
+
   return (
     <View style={styles.container}>
       <Image source={Logo} style={styles.ImgLogo} />
@@ -140,16 +144,11 @@ Um email foi mandado ao dono do livro`);
             Solicitar
           </Text>
         </RectButton>
-        {/* <Text>
-          {'  '}
-          id book:
-          {params.bookName.id}
-        </Text>
-        <Text>
-          {'  '}
-          id owner:
-          {params.bookName.owner_id}
-        </Text> */}
+        <RectButton onPress={handleProfilePage}>
+          <Text>
+            Perfil
+          </Text>
+        </RectButton>
       </ScrollView>
     </View>
   );

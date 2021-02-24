@@ -92,6 +92,10 @@ export default function SearchPage() {
     }
   }, [languageBook, params.token]);
 
+  function handleProfilePage() {
+    navigation.navigate('ProfileUserPage');
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -196,6 +200,12 @@ export default function SearchPage() {
             </View>
           </RectButton>
         ))}
+
+        <RectButton onPress={handleProfilePage}>
+          <Text>
+            Perfil
+          </Text>
+        </RectButton>
 
       </ScrollView>
     </View>

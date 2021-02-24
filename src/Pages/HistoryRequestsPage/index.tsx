@@ -3,7 +3,7 @@ import {
   Text, View, Image, ScrollView,
 } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 import * as Yup from 'yup';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
@@ -43,6 +43,7 @@ export default function HistoryRequests() {
   const route = useRoute();
   const params = route.params as IId;
   const id_admin = params.id;
+  const navigation = useNavigation();
 
   const [requistitions, SetRequistitions] = useState<IRequisition[]>([]);
 
@@ -90,6 +91,10 @@ export default function HistoryRequests() {
       alert('Ops, parece que não achamos nada :/');
     }
   }, [params.id]);
+
+  function handleProfilePage() {
+    navigation.navigate('ProfileAdminPage');
+  }
 
   return (
     <View style={styles.container}>
@@ -198,6 +203,11 @@ export default function HistoryRequests() {
             </Text>
           </View>
         ))}
+        <RectButton onPress={handleProfilePage}>
+          <Text>
+            Perfil
+          </Text>
+        </RectButton>
       </ScrollView>
     </View>
   );
