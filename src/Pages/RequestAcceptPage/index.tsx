@@ -66,6 +66,9 @@ export default function RequestAccept() {
   const handleNavigate = useCallback(async () => {
     navigation.navigate('HistoryRequestsPage', { id });
   }, [id, navigation]);
+  function handleProfilePage() {
+    navigation.navigate('ProfileAdminPage', { id });
+  }
   return (
     <View style={styles.container}>
       <ScrollView
@@ -155,6 +158,11 @@ export default function RequestAccept() {
             </RectButton>
           </View>
         ))}
+        <RectButton onPress={handleProfilePage}>
+          <Text style={styles.Perfil}>
+            Perfil
+          </Text>
+        </RectButton>
       </ScrollView>
     </View>
   );

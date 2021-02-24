@@ -144,6 +144,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: '18%',
   },
-
+  Perfil: {
+    color: '#fff',
+  },
 });
 export default styles;

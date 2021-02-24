@@ -43,6 +43,7 @@ export default function HistoryRequests() {
   const route = useRoute();
   const params = route.params as IId;
   const id_admin = params.id;
+  const { id } = params;
   const navigation = useNavigation();
 
   const [requistitions, SetRequistitions] = useState<IRequisition[]>([]);
@@ -93,7 +94,7 @@ export default function HistoryRequests() {
   }, [params.id]);
 
   function handleProfilePage() {
-    navigation.navigate('ProfileAdminPage');
+    navigation.navigate('ProfileAdminPage', { id });
   }
 
   return (
@@ -204,7 +205,7 @@ export default function HistoryRequests() {
           </View>
         ))}
         <RectButton onPress={handleProfilePage}>
-          <Text>
+          <Text style={styles.Perfil}>
             Perfil
           </Text>
         </RectButton>

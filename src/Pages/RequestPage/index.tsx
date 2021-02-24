@@ -123,6 +123,10 @@ export default function RequestPage() {
     navigation.navigate('RequestAcceptPage', { id });
   }, [id, navigation]);
 
+  function handleProfilePage() {
+    navigation.navigate('ProfileAdminPage', { id });
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -210,6 +214,12 @@ export default function RequestPage() {
           </View>
 
         ))}
+
+        <RectButton onPress={handleProfilePage}>
+          <Text style={styles.Perfil}>
+            Perfil
+          </Text>
+        </RectButton>
       </ScrollView>
     </View>
   );

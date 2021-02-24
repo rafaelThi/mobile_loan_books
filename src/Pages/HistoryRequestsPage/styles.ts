@@ -189,6 +189,8 @@ const styles = StyleSheet.create({
     width: 25,
     borderRadius: 50,
   },
-
+  Perfil: {
+    color: '#fff',
+  },
 });
 export default styles;

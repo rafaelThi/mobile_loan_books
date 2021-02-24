@@ -169,6 +169,11 @@ const styles = StyleSheet.create({
     width: 25,
     borderRadius: 50,
   },
+  Perfil: {
+    color: '#fff',
+    marginBottom: 20,
+    marginTop: 5,
+  },
 
 });
 export default styles;

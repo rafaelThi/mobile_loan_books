@@ -3,12 +3,23 @@ import {
   Text, View, Image, ScrollView,
 } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
+import { useNavigation, useRoute } from '@react-navigation/core';
 import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 import api from '../../service/api';
 
+interface IId {
+  id: string;
+}
+
 export default function DevolutionPage() {
+  const route = useRoute();
+  const params = route.params as IId;
+  const { id } = params;
+
   const [stateID, setStateID] = useState('');
+
+  const navigation = useNavigation();
 
   const handleLogin = useCallback(async () => {
     try {
@@ -40,6 +51,10 @@ export default function DevolutionPage() {
       alert(`Ops, algo deu errado :/  ${error}`);
     }
   }, [stateID]);
+
+  function handleProfilePage() {
+    navigation.navigate('ProfileAdminPage', { id });
+  }
 
   return (
     <View style={styles.container}>
@@ -76,6 +91,11 @@ export default function DevolutionPage() {
               Confirmar
             </Text>
           </View>
+        </RectButton>
+        <RectButton onPress={handleProfilePage}>
+          <Text style={styles.Perfil}>
+            Perfil
+          </Text>
         </RectButton>
       </ScrollView>
     </View>

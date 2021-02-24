@@ -1,19 +1,43 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   View, Text, ScrollView, Image,
 } from 'react-native';
 import { RectButton, TextInput } from 'react-native-gesture-handler';
 // import { useNavigation } from '@react-navigation/core';
 import * as Yup from 'yup';
+import { useRoute } from '@react-navigation/core';
 import styles from './styles';
 import Logo from '../../../assets/Logo.png';
+import api from '../../service/api';
 // import api from '../../service/api';
 
+interface IId {
+  id: string;
+ }
+
+ interface IDataAdmin {
+  idOwner: {
+    fullNameAdmin:string;
+    emailAdmin:string;
+  }
+ }
+
 export default function ProfileAdmin() {
+  const route = useRoute();
+  const params = route.params as IId;
+  const { id } = params;
+
   const [stateEmail, setStateEmail] = useState('');
   const [statePassword, setStatePassword] = useState('');
+  const [dataAdmin, setDataAdmin] = useState<IDataAdmin>();
 
   // const navigation = useNavigation();
+
+  useEffect(() => {
+    api.get(`/users-book-owners/list-owner/${id}`).then((response) => {
+      setDataAdmin(response.data);
+    });
+  }, [id]);
 
   const handleLogin = useCallback(async () => {
     try {
@@ -32,11 +56,20 @@ export default function ProfileAdmin() {
       });
 
       await schema.validate({ email, password });
+      const data_admin = await api.get(`/users-book-owners/list-owner/${id}`);
+      if (data_admin.data.idOwner.emailAdmin === email) {
+        await api.put(`/users-book-owners/reset-password-admin/${id}`, {
+          password,
+        });
+        alert('Nova senha salva');
+      } else {
+        alert('Puts... algo deu errado :/');
+      }
     } catch (err) {
       alert(`E-mail ou senha incorreto
             ${err}`);
     }
-  }, [stateEmail, statePassword]);
+  }, [id, stateEmail, statePassword]);
 
   return (
     <View style={styles.container}>
@@ -52,13 +85,13 @@ export default function ProfileAdmin() {
         }}
       >
         <Text style={styles.titleHome}>
-          Fulano da Silva
+          {dataAdmin?.idOwner.fullNameAdmin}
         </Text>
         <Text style={styles.textRequestMessage}>
           Email de Login Admin:
         </Text>
         <Text style={styles.textRequestMessage}>
-          email@email.com
+          {dataAdmin?.idOwner.emailAdmin}
         </Text>
         <Text style={styles.textRequest}>
           Caso queira mudar sua senha atual, digite seu email de login e sua nova senha

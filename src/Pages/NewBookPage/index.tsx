@@ -14,6 +14,7 @@ interface IId {
 export default function NewBookPage() {
   const route = useRoute();
   const params = route.params as IId;
+  const { id } = params;
 
   const navigation = useNavigation();
 
@@ -50,6 +51,11 @@ export default function NewBookPage() {
       alert(error);
     }
   }, [authorBook, languageBook, navigation, params.id, stateImg, titleBook]);
+
+  function handleProfilePage() {
+    navigation.navigate('ProfileAdminPage', { id });
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView
@@ -122,6 +128,11 @@ export default function NewBookPage() {
             </View>
           </RectButton>
         </View>
+        <RectButton onPress={handleProfilePage}>
+          <Text style={styles.Perfil}>
+            Perfil
+          </Text>
+        </RectButton>
       </ScrollView>
     </View>
   );

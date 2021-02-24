@@ -76,8 +76,5 @@ const styles = StyleSheet.create({
     height: 45,
     width: 40,
   },
-  Perfil: {
-    color: '#fff',
-  },
 });
 export default styles;

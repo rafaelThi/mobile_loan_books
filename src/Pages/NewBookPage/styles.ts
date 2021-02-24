@@ -117,5 +117,8 @@ const styles = StyleSheet.create({
     maxHeight: 20,
     maxWidth: 250,
   },
+  Perfil: {
+    color: '#fff',
+  },
 });
 export default styles;

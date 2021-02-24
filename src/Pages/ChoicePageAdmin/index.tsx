@@ -8,7 +8,7 @@ import Logo from '../../../assets/Logo.png';
 import styles from './styles';
 
 interface IId {
-  id: string;
+ id: string;
 }
 
 export default function ChoicePageAdmin() {
@@ -27,6 +27,10 @@ export default function ChoicePageAdmin() {
   const handleDevolution = useCallback(async () => {
     navigation.navigate('DevolutionPage', { id });
   }, [id, navigation]);
+
+  function handleProfilePage() {
+    navigation.navigate('ProfileAdminPage', { id });
+  }
 
   return (
     <View style={styles.container}>
@@ -69,6 +73,11 @@ export default function ChoicePageAdmin() {
               Devolver um livro
             </Text>
           </View>
+        </RectButton>
+        <RectButton onPress={handleProfilePage}>
+          <Text style={styles.Perfil}>
+            Perfil
+          </Text>
         </RectButton>
       </ScrollView>
     </View>
