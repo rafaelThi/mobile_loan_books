@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
   titleHome: {
     justifyContent: 'center',
     textAlign: 'left',
@@ -17,6 +18,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 150,
   },
+
   ImgLogo: {
     position: 'absolute',
     width: 93,
@@ -25,9 +27,11 @@ const styles = StyleSheet.create({
     top: 35,
     borderRadius: 15,
   },
+
   search: {
     marginTop: 0,
   },
+
   TextLogo: {
     position: 'absolute',
     // width: 93,
@@ -37,6 +41,7 @@ const styles = StyleSheet.create({
     fontSize: 38,
     color: '#DBDBDB',
   },
+
   Button: {
     backgroundColor: '#04D361',
     borderRadius: 15,
@@ -49,11 +54,13 @@ const styles = StyleSheet.create({
     marginHorizontal: 60,
     marginVertical: 25,
   },
+
   ViewButton: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   ViewButtonAdmin: {
     flexDirection: 'row',
     justifyContent: 'flex-end',
@@ -67,6 +74,7 @@ const styles = StyleSheet.create({
     marginVertical: 0,
     marginHorizontal: 5,
   },
+  
   Perfil: {
     color: '#fff',
   },
