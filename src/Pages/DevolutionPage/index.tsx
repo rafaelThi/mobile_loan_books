@@ -50,7 +50,7 @@ export default function DevolutionPage() {
     } catch (error) {
       alert(`Ops, algo deu errado :/  ${error}`);
     }
-  }, [stateID]);
+  }, []);
 
   function handleProfilePage() {
     navigation.navigate('ProfileAdminPage', { id });
